@@ -1,0 +1,72 @@
+{% load custom_filters %}
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>GlueNews - то что актуально сейчас в России и мире</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <table style="width: 100%">
+            <thead>
+                <tr>
+                  <th scope="col" style="width: 25%"><a href="/news/">Новости</a></th>
+                  <th scope="col" style="width: 25%"><a href="/articles/">Статьи</a></th>
+                  <th scope="col" style="width: 25%"><a href="/contacts/">Контакты</a></th>
+                  <th scope="col" style="width: 25%"><a href="/about/">О нас</a></th>
+                </tr>
+              </thead>
+        </table>
+    </header>
+
+    {% block data %}
+    <div style="display: flex;">
+        <div style="flex: 30%">
+            <h1>Фильтры</h1>
+            <form action='' method="GET">
+                {{ posts_filter.form.as_p }}
+                <input type="submit" value="Найти" />
+            </form>
+        </div>
+        
+        <div style="flex: 70%">
+            <div>
+                <h1>Новости</h1>
+                {% for i in page_obj.object_list %}
+                    <div style="margin-bottom: 50px;">
+                        <h1><a href="{{i.pk}}/">{{ i.title|ban_words }}</a></h1>
+                        <h3>{{ i.time_of_creating }}</h3>
+                        <p>{{ i.text|ban_words|truncatechars:20 }}<p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div>
+                {% if page_obj.has_previous %}
+                    <a href="?{% url_replace page=1 %}">1</a>
+                    {% if page_obj.previous_page_number != 1 %}
+                        ...
+                        <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+                    {% endif %}
+                {% endif %}
+
+                {{ page_obj.number }}
+
+                {% if page_obj.has_next %}
+                    <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+                    {% if page_obj.paginator.num_pages != page_obj.next_page_number %}
+                        ...
+                        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body> 
+</html>

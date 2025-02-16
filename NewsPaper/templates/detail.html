@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+{% load custom_filters %}
+
+{% block data %}
+    <div>
+        <h1>{{ post.title }}</h1>
+        <p> {{ post.text }}</p>
+        <p> {{ post.time_of_creating|date:'d M Y'}} </p>
+    </div>
+{% endblock %}
