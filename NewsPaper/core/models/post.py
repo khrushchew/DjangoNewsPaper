@@ -16,8 +16,8 @@ class Post(models.Model):
     
     category = models.ManyToManyField('category', through=PostCategory, verbose_name='Категория')
     
-    title = models.CharField(max_length=100, verbose_name='Название поста')
-    text = models.TextField(verbose_name='Содержание поста')
+    title = models.CharField(max_length=100, verbose_name='Название поста', null=False, blank=False)
+    text = models.TextField(verbose_name='Содержание поста', null=False, blank=False)
     rating = models.IntegerField(default=0, verbose_name='Рейтинг')
     
     def like(self):

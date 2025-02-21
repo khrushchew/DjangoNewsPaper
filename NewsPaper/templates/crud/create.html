@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+
+{% block data %}
+    <form method='POST'>
+        {% csrf_token %}
+        <div style="display: flex;">
+            <div style="flex: 40%;">
+                <div>
+                    <h1>{{ form.category.label }}</h1>
+                    {{ form.errors.category }}
+                    {{ form.category }}
+                </div>
+            </div>
+            <div style="flex: 60%">
+                <div>
+                    <h1>{{ form.title.label }}</h1>
+                    {{ form.errors.title }}
+                    {{ form.title }}
+                </div>
+                <div>
+                    <h1>{{ form.text.label }}</h1>
+                    {{ form.errors.text }}
+                    {{ form.text }}
+                </div>
+                <input type="submit" value="Сохранить">
+            </div>
+        </div>
+    </form>
+    {% block delete %}
+    {% endblock %}
+{% endblock %}

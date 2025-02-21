@@ -1,0 +1,29 @@
+{% extends 'default.html' %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block head_title %}
+            {% endblock head_title %}
+        </title>
+        {% block extra_head %}
+        {% endblock extra_head %}
+    </head>
+
+
+{% block data %}
+    <div style='flex: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;'>
+        <div>
+            {% block pre_content %}
+            {% endblock pre_content %}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+{% endblock data %}
+</html>

@@ -19,7 +19,10 @@ from django.views.generic.base import RedirectView
 from django.urls import path, include
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/news/')),
     path('admin/', admin.site.urls),
-    path('news/', include('news.urls')),
-    path('', RedirectView.as_view(url='/news/'))
+    path('news/', include('post.urls.n_urls')),
+    path('articles/', include('post.urls.a_urls')),
+    path('sign/', include('sign.urls')),
+    path('profile/', include('profile.urls')),
 ]
